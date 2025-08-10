@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby Reveal Countdown</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        background-color: #f7f3eb;
+    }
+    #countdown-section {
+        position: relative;
+        display: inline-block;
+    }
+    #countdown-section img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+    #timer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2.5em;
+        font-weight: bold;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 10px 20px;
+        border-radius: 10px;
+        color: #5a4a42;
+    }
+</style>
+</head>
+<body>
+<div id="countdown-section">
+    <img src="countdown.png" alt="Countdown">
+    <div id="timer"></div>
+</div>
+
+<script>
+    const countdownDate = new Date("Sep 6, 2025 18:00:00 GMT+0100").getTime();
+    const timerElement = document.getElementById("timer");
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+
+        if (distance <= 0) {
+            window.location.href = "reveal.html";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
+</body>
+</html>
